@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
+    "test": "mocha $(find ./lib -path '*.test.js') -t 5s",
     "start": "node index.js"
   },
   "repository": {
@@ -33,5 +33,10 @@
     "xmldom": "^0.1.27",
     "xmlserializer": "^0.6.0",
     "xpath": "0.0.23"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   }
 }

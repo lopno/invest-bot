@@ -1,8 +1,10 @@
 const SlackBot = require('slackbots');
 
-const express = require('express');
-const favicon = require('serve-favicon');
-const app = express();
+const slackMessageParse = require('./lib/parse/slackMessage');
+
+// const express = require('express');
+// const favicon = require('serve-favicon');
+// const app = express();
 
 const valuationUtils = require('./lib/utils/valuation');
 const fundTypeConstants = require('./lib/constant/fundType');
@@ -35,7 +37,7 @@ investBot.on('start', () => {
   // investBot.postMessageToUser('vedran', 'Invest 4 lyfe!');
   // investBot.postMessageToChannel('invest_test', 'service started', params);
 
-  console.log(investBot.channels);
+  // console.log(investBot.channels);
 });
 
 function _getChannelById(channelId) {
@@ -53,7 +55,7 @@ investBot.on('message', (data) => {
     console.log(data);
     const channel = _getChannelById(data.channel);
     console.log('posting to channel: ', channel);
-    valuationUtils.getValuation(fundTypeConstants.balanced)
+    valuationUtils.getValuation(slackMessageParse.parseSlackMessage(data.text).fundType)
       .then((valuation) => investBot.postMessageToChannel(channel, JSON.stringify(valuation), params))
       .then((res) => console.log('res: ', res));
       // .error((error) => console.log('error: ', error));
