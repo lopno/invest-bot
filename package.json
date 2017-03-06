@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/lopno/invest-bot#readme",
   "dependencies": {
+    "@slack/client": "^3.8.1",
     "express": "^4.15.2"
   }
 }
