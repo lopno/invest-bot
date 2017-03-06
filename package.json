@@ -1,0 +1,28 @@
+{
+  "name": "invest-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lopno/invest-bot.git"
+  },
+  "keywords": [
+    "slack",
+    "invest",
+    "bot"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lopno/invest-bot/issues"
+  },
+  "homepage": "https://github.com/lopno/invest-bot#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
