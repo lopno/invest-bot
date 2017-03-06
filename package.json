@@ -23,8 +23,14 @@
   },
   "homepage": "https://github.com/lopno/invest-bot#readme",
   "dependencies": {
+    "@slack/client": "^3.8.1",
     "express": "^4.15.2",
+    "node-fetch": "^1.6.3",
+    "parse5": "^3.0.2",
+    "promisify-fetch": "^1.0.5",
     "serve-favicon": "^2.4.1",
-    "@slack/client": "^3.8.1"
+    "xmldom": "^0.1.27",
+    "xmlserializer": "^0.6.0",
+    "xpath": "0.0.23"
   }
 }
