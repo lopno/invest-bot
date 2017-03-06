@@ -24,6 +24,7 @@
   "homepage": "https://github.com/lopno/invest-bot#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "serve-favicon": "^2.4.1"
+    "serve-favicon": "^2.4.1",
+    "@slack/client": "^3.8.1"
   }
 }
