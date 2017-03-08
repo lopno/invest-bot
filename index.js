@@ -1,36 +1,19 @@
+/* eslint-disable no-console */
 const SlackBot = require('slackbots');
 
 const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
-
-// const express = require('express');
-// const favicon = require('serve-favicon');
-// const app = express();
-
 const valuationUtils = require('./lib/utils/valuation');
-const fundTypeConstants = require('./lib/constant/fundType');
-/*
-app.get('/', (req, res) => {
-  return valuationUtils.getValuation(fundTypeConstants.balanced)
-    .then((valuation) => res.send(JSON.stringify(valuation)));
-});
-
-app.use(favicon(__dirname + '/public/favicon.ico'));
-
-app.listen(process.env.PORT || 3000);
-*/
 
 const investBot = new SlackBot({
   token: process.env.SLACK_TOKEN,
-  name: 'Invest Bot'
+  name: 'Invest Bot',
 });
 
 // more information about additional params https://api.slack.com/methods/chat.postMessage
 const params = {
-  icon_emoji: ':ok_hand:'
+  icon_emoji: ':ok_hand:',
 };
-
-var channels;
 
 investBot.on('start', () => {
 
@@ -41,10 +24,10 @@ investBot.on('start', () => {
   // console.log(investBot.channels);
 });
 
-function _getChannelById(channelId) {
+function getChannelById(channelId) {
   // console.log('channels', channels);
   console.log('channelId', channelId);
-  const channelRes = investBot.channels.filter(item => (item.id == channelId))[0];
+  const channelRes = investBot.channels.filter(item => (item.id === channelId))[0];
   console.log('found this channel: ', channelRes);
   return channelRes.name;
 }
@@ -54,17 +37,17 @@ investBot.on('message', (data) => {
   if (data.type === 'message'
   && data.text.includes('<@U4EC16W8M>')) {
     console.log(data);
-    const channel = _getChannelById(data.channel);
+    const channel = getChannelById(data.channel);
     console.log('posting to channel: ', channel);
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
     valuationUtils.getValuation(parsedMessage.fundType)
-      .then((valuation) =>
+      .then(valuation =>
         investBot.postMessageToChannel(
           channel,
-          messageUtils.formatValuation(valuation, parsedMessage.sharesCount, parsedMessage.fundType),
-          params)
-      )
-      .then((res) => console.log('res: ', res))
-      .catch((error) => console.log('error: ', error));
+          messageUtils.formatValuation(
+            valuation, parsedMessage.sharesCount, parsedMessage.fundType),
+          params))
+      .then(res => console.log('res: ', res))
+      .catch(error => console.log('error: ', error));
   }
 });
