@@ -5,6 +5,20 @@ const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
 const valuationUtils = require('./lib/utils/valuation');
 
+const express = require('express');
+const favicon = require('serve-favicon');
+const app = express();
+
+
+app.get('/', (req, res) => {
+  return valuationUtils.getValuation(fundTypeConstants.balanced)
+    .then((valuation) => res.send(JSON.stringify(valuation)));
+});
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
+
+app.listen(process.env.PORT || 3000);
+
 const investBot = new SlackBot({
   token: process.env.SLACK_TOKEN,
   name: 'Invest Bot',
@@ -35,7 +49,7 @@ function getChannelById(channelId) {
 // all ingoing events https://api.slack.com/rtm
 investBot.on('message', (data) => {
   if (data.type === 'message'
-  && data.text.includes('<@U4EC16W8M>')) {
+    && data.text.includes('<@U4EC16W8M>')) {
     console.log(data);
     const channel = getChannelById(data.channel);
     console.log('posting to channel: ', channel);
