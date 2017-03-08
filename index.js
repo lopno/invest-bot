@@ -1,24 +1,9 @@
 /* eslint-disable no-console */
 const SlackBot = require('slackbots');
 
-// const express = require('express');
-// const favicon = require('serve-favicon');
-// const app = express();
-
 const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
 const valuationUtils = require('./lib/utils/valuation');
-
-/*
- app.get('/', (req, res) => {
- return valuationUtils.getValuation(fundTypeConstants.balanced)
- .then((valuation) => res.send(JSON.stringify(valuation)));
- });
-
- app.use(favicon(__dirname + '/public/favicon.ico'));
-
- app.listen(process.env.PORT || 3000);
- */
 
 const investBot = new SlackBot({
   token: process.env.SLACK_TOKEN,
