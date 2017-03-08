@@ -57,7 +57,7 @@ investBot.on('message', (data) => {
     const channel = _getChannelById(data.channel);
     console.log('posting to channel: ', channel);
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text).fundType;
-    valuationUtils.getValuation(fundType)
+    valuationUtils.getValuation(parsedMessage.fundType)
       .then((valuation) =>
         investBot.postMessageToChannel(
           channel,
