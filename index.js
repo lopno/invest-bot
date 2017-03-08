@@ -56,7 +56,7 @@ investBot.on('message', (data) => {
     console.log(data);
     const channel = _getChannelById(data.channel);
     console.log('posting to channel: ', channel);
-    const parsedMessage = slackMessageParse.parseSlackMessage(data.text).fundType;
+    const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
     valuationUtils.getValuation(parsedMessage.fundType)
       .then((valuation) =>
         investBot.postMessageToChannel(
@@ -64,7 +64,7 @@ investBot.on('message', (data) => {
           messageUtils.formatValuation(valuation, parsedMessage.sharesCount, parsedMessage.fundType),
           params)
       )
-      .then((res) => console.log('res: ', res));
-      // .error((error) => console.log('error: ', error));
+      .then((res) => console.log('res: ', res))
+      .catch((error) => console.log('error: ', error));
   }
 });
