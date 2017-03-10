@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const SlackBot = require('slackbots');
+const http = require('http');
 
 const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
@@ -9,6 +10,10 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const app = express();
 
+
+setInterval(function() {
+  http.get("http://protected-savannah-66517.herokuapp.com");
+}, 300000); // every 5 minutes (300000)
 
 app.get('/', (req, res) => {
   return valuationUtils.getValuation(fundTypeConstants.balanced)
