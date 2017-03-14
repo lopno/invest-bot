@@ -42,7 +42,7 @@ function getChannelById(channelId) {
   // console.log('channels', channels);
   console.log('channelId', channelId);
   const channelRes = investBot.channels.filter(item => (item.id === channelId))[0];
-  console.log('found this channel: ', channelRes);
+  console.log('found this channel: ', channelRes.name);
   return channelRes.name;
 }
 
@@ -50,10 +50,10 @@ function getChannelById(channelId) {
 investBot.on('message', (data) => {
   if (data.type === 'message'
     && data.text.includes('<@U4EC16W8M>')) {
-    console.log(data);
     const channel = getChannelById(data.channel);
-    console.log('posting to channel: ', channel);
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
+    console.log('Message: ', data.text);
+    console.log('Parsed Message: ', parsedMessage);
     valuationUtils.getValuation(parsedMessage.fundType)
       .then(valuation =>
         investBot.postMessageToChannel(
@@ -61,7 +61,6 @@ investBot.on('message', (data) => {
           messageUtils.formatValuation(
             valuation, parsedMessage.sharesCount, parsedMessage.fundType),
           params))
-      .then(res => console.log('res: ', res))
       .catch(error => console.log('error: ', error));
   }
 });
