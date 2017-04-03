@@ -28,6 +28,7 @@
     "express": "^4.15.2",
     "node-fetch": "^1.6.3",
     "parse5": "^3.0.2",
+    "pg-promise": "^5.6.4",
     "promisify-fetch": "^1.0.5",
     "serve-favicon": "^2.4.1",
     "slackbots": "^1.0.2",
