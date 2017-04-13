@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha $(find ./lib -path '*.test.js') -t 5s",
     "start": "node index.js",
-    "lint": "eslint ."
+    "lint": "eslint --cache ."
   },
   "repository": {
     "type": "git",
@@ -45,6 +45,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
     "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "sinon-as-promised": "^4.0.3"
   }
 }
