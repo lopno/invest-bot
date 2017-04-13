@@ -3,5 +3,8 @@
   "env": {
     "node": true,
     "es6": false
+  },
+  "rules": {
+    "comma-dangle": "off"
   }
 }
