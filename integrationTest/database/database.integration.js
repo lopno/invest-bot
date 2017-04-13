@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies, func-names, prefer-arrow-callback */
 const assert = require('chai').assert;
 const database = require('../../lib/database/database');
 
