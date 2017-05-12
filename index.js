@@ -54,13 +54,17 @@ investBot.on('message', (data) => {
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
     console.log('Message: ', data.text);
     console.log('Parsed Message: ', parsedMessage);
-    valuationUtils.getValuation(parsedMessage.fundType)
-      .then(valuation =>
-        investBot.postMessageToChannel(
-          channel,
-          messageUtils.formatValuation(
-            valuation, parsedMessage.sharesCount, parsedMessage.fundType),
-          params))
+    valuationUtils.getValuation(parsedMessage.funds)
+      .then(valuations =>
+        valuations.forEach(valuation =>
+          investBot.postMessageToChannel(
+            channel,
+            messageUtils.formatValuation(
+              valuation, parsedMessage.sharesCount, valuation.fundType),
+            params
+          )
+        )
+      )
       .catch(error => console.log('error: ', error));
   }
 });

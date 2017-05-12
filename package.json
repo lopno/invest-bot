@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find ./lib -path '*.test.js') -t 5s",
+    "test": "mocha $(find ./lib -path '*.test.js') -t 8s",
+    "test:watch": "mocha $(find ./lib -path '*.test.js') -t 8s --watch",
     "start": "node index.js",
     "lint": "eslint --cache ."
   },
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/lopno/invest-bot#readme",
   "dependencies": {
     "@slack/client": "^3.8.1",
+    "array-includes": "^3.0.3",
     "express": "^4.15.2",
     "node-fetch": "^1.6.3",
     "parse5": "^3.0.2",
