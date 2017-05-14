@@ -4,9 +4,11 @@ const http = require('http');
 const express = require('express');
 const favicon = require('serve-favicon');
 
+const graphAction = require('./lib/action/graph');
 const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
 const valuationUtils = require('./lib/utils/valuation');
+const actionTypes = require('./lib/constant/action');
 
 const app = express();
 
@@ -54,17 +56,32 @@ investBot.on('message', (data) => {
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
     console.log('Message: ', data.text);
     console.log('Parsed Message: ', parsedMessage);
-    valuationUtils.getValuation(parsedMessage.funds)
-      .then(valuations =>
-        valuations.forEach(valuation =>
-          investBot.postMessageToChannel(
-            channel,
-            messageUtils.formatValuation(
-              valuation, parsedMessage.sharesCount, valuation.fundType),
-            params
+
+    if (parsedMessage.action === actionTypes.latestValuation) {
+      valuationUtils.getValuation(parsedMessage.funds)
+        .then(valuations =>
+          valuations.forEach(valuation =>
+            investBot.postMessageToChannel(
+              channel,
+              messageUtils.formatValuation(
+                valuation, parsedMessage.sharesCount, valuation.fundType),
+              params
+            )
           )
         )
-      )
-      .catch(error => console.log('error: ', error));
+        .catch(error => console.log('error: ', error));
+    } else if (parsedMessage.action === actionTypes.graph) {
+      // TODO: support more funds in one graph later
+      // TODO: rename parsedMessage.sharesCount
+      graphAction.graphFund(parsedMessage.funds[0], parseInt(parsedMessage.sharesCount, 10))
+        .then((graphLink) => {
+          investBot.postMessageToChannel(
+            channel,
+            graphLink,
+            params
+          );
+        })
+        .catch(error => console.log(JSON.stringify(error)));
+    }
   }
 });
