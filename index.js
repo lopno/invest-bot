@@ -11,6 +11,7 @@ const valuationUtils = require('./lib/utils/valuation');
 const actionTypes = require('./lib/constant/action');
 
 const app = express();
+var investBotUserId = null; // eslint-disable-line no-var
 
 // every 5 minutes (300000)
 setInterval(() => http.get('http://protected-savannah-66517.herokuapp.com'), 300000);
@@ -32,12 +33,10 @@ const params = {
 };
 
 investBot.on('start', () => {
-
-  // investBot.postMessageToUser('mikaelmidt', 'Invest 4 lyfe!');
-  // investBot.postMessageToUser('vedran', 'Invest 4 lyfe!');
-  // investBot.postMessageToChannel('invest_test', 'service started', params);
-
-  // console.log(investBot.channels);
+  investBot.getUser(process.env.BOT_NAME || 'investbot')
+    .then((user) => {
+      investBotUserId = user.id;
+    });
 });
 
 function getChannelById(channelId) {
@@ -50,8 +49,9 @@ function getChannelById(channelId) {
 
 // all ingoing events https://api.slack.com/rtm
 investBot.on('message', (data) => {
-  if (data.type === 'message'
-    && data.text.includes('<@U4EC16W8M>')) {
+  if (investBotUserId
+    && data.type === 'message'
+    && data.text.includes(`<@${investBotUserId}>`)) {
     const channel = getChannelById(data.channel);
     const parsedMessage = slackMessageParse.parseSlackMessage(data.text);
     console.log('Message: ', data.text);
