@@ -13,6 +13,11 @@ npm start
 npm test
 ```
 
+### Integration Test
+```
+DATABASE_URL={set_actual_url_here} ava **/*.integration.js
+```
+
 ### Lint
 ```
 npm run lint
