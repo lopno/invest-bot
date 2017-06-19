@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find ./lib -path '*.test.js') -t 8s",
-    "test:watch": "mocha $(find ./lib -path '*.test.js') -t 8s --watch",
     "start": "node index.js",
-    "lint": "eslint --cache ."
+    "lint": "eslint --cache .",
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -39,14 +38,13 @@
     "xpath": "0.0.23"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "ava": "^0.19.1",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
-    "mocha": "^3.2.0",
     "sinon": "^1.17.7",
     "sinon-as-promised": "^4.0.3"
   }
