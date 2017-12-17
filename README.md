@@ -25,13 +25,17 @@ npm run lint
 
 ## Environment variables
 
-### DATABASE_URL
-URL for the postgres database in the format
-```
-postgres://USERNAME:PASSWORD@IP:PORT/DATABASE_NAME
-```
+### DATABASE_HOST
+Database server name or IP address
+### DATABASE_PORT
+Database server port number
+### DATABASE_NAME
+Database name
+### DATABASE_USER
+Database user name
+### DATABASE_PASSWORD
+Database user password
 
-SSL must be enabled on the database.
 ### GOOGLE_API_KEY
 Used for shortening URLs for the graph images.
 You can get a key at https://developers.google.com/url-shortener/v1/getting_started#APIKey
@@ -39,9 +43,6 @@ You can get a key at https://developers.google.com/url-shortener/v1/getting_star
 ### SLACK_TOKEN
 The Slack api token for the team you want to run invest-bot in.
 See https://api.slack.com/
-### BOT_NAME
-This is the name used for interacting with the bot.
-The default value is `investbot`.
 
 ## Setup
 
