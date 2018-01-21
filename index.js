@@ -58,8 +58,8 @@ investBot.on('direct_mention', (bot, message) => {
       .catch(error => console.log(JSON.stringify(error)));
   } else if (parsedMessage.action === actionTypes.invested) {
     investmentUtils.getInvestment(parsedMessage.funds)
-      .then(invested =>
-        invested.forEach(invested =>
+      .then(investments =>
+        investments.forEach(invested =>
           bot.reply(
             message,
             messageUtils.formatInvestment(
@@ -71,12 +71,12 @@ investBot.on('direct_mention', (bot, message) => {
       .catch(error => console.log(JSON.stringify(error)));
   } else if (parsedMessage.action === actionTypes.total) {
     investmentUtils.getInvestment(parsedMessage.funds)
-     .then(invested =>
+     .then(investment =>
          bot.reply(
            message,
            messageUtils.getTotalInvestment(
-             invested,
-             invested.fundType,
+             investment,
+             investment.fundType,
              parsedMessage.action)
          )
      )
