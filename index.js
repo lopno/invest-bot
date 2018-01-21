@@ -5,6 +5,7 @@ const slackMessageParse = require('./lib/parse/slackMessage');
 const messageUtils = require('./lib/utils/message');
 const valuationUtils = require('./lib/utils/valuation');
 const actionTypes = require('./lib/constant/action');
+const investmentUtils = require('./lib/utils/invested');
 
 // init slack bot
 const investBot = Botkit.slackbot({
@@ -55,5 +56,30 @@ investBot.on('direct_mention', (bot, message) => {
         );
       })
       .catch(error => console.log(JSON.stringify(error)));
+  } else if (parsedMessage.action === actionTypes.invested) {
+    investmentUtils.getInvestment(parsedMessage.funds)
+      .then(investments =>
+        investments.forEach(invested =>
+          bot.reply(
+            message,
+            messageUtils.formatInvestment(
+              invested,
+              invested.fundType)
+          )
+        )
+      )
+      .catch(error => console.log(JSON.stringify(error)));
+  } else if (parsedMessage.action === actionTypes.total) {
+    investmentUtils.getInvestment(parsedMessage.funds)
+     .then(investment =>
+         bot.reply(
+           message,
+           messageUtils.getTotalInvestment(
+             investment,
+             investment.fundType,
+             parsedMessage.action)
+         )
+     )
+     .catch(error => console.log(JSON.stringify(error)));
   }
 });
