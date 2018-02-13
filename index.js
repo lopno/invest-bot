@@ -46,11 +46,11 @@ investBot.on('direct_mention', (bot, message) => {
       )
       .catch(error => console.log('error: ', error));
   } else if (parsedMessage.action === actionTypes.help) {
-        bot.reply(
-          message,
-          messageUtils.getHelp(parsedMessage.action)
-        )
-      .catch(error => console.log(JSON.stringify(error)));
+    bot.reply(
+      message,
+      messageUtils.getHelp()
+    )
+    .catch(error => console.log(JSON.stringify(error)));
   } else if (parsedMessage.action === actionTypes.graph) {
     // TODO: support more funds in one graph later
     // TODO: rename parsedMessage.sharesCount
