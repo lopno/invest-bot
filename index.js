@@ -54,7 +54,7 @@ investBot.on('direct_mention', (bot, message) => {
   } else if (parsedMessage.action === actionTypes.graph) {
     // TODO: support more funds in one graph later
     // TODO: rename parsedMessage.sharesCount
-    graphAction.graphFund(parsedMessage.funds[0], parseInt(parsedMessage.sharesCount, 10))
+    graphAction.graphFund(parsedMessage.funds[0], parseInt(parsedMessage.sharesCount == 0 ? 10 : parsedMessage.sharesCount , 10))
       .then((graphLink) => {
         bot.reply(
           message,
