@@ -56,7 +56,6 @@ investBot.on('direct_mention', (bot, message) => {
     // TODO: rename parsedMessage.sharesCount
     const sharesCountInt = parseInt(parsedMessage.sharesCount, 10);
     const sharesCount = sharesCountInt === 0 ? 10 : sharesCountInt;
-    console.log(sharesCount);
     graphAction.graphFund(parsedMessage.funds[0], sharesCount)
       .then((graphLink) => {
         bot.reply(
